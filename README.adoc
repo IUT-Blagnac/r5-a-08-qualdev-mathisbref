@@ -20,3 +20,26 @@ public void today_is_sunday() {
 image::artifacts-r303.svg[width=80%]
 
 == TP1
+
+Traduisez le test d’acceptance suivant en feature Gherkin dans un nouveau fichier is_it_friday_yet.feature dans le même répertoire que example.feature :
+
+### Si on est dimanche et qu’on demande. si c’est vendredi, alors on doit repondre "Non".
+
+[source,gherkin]
+---
+Feature: Is it Friday ?
+    Scenario: Sunday is not Friday
+      Given today is sunday
+      When i said it's friday
+      Then I'm wrong it's not friday
+---
+
+
+
+
+
+
+
+
+
+
