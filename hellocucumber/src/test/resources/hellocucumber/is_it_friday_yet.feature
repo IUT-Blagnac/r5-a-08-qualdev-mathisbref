@@ -1,5 +1,14 @@
-Feature: Is it Friday ?
-    Scenario: Sunday is not Friday
-      Given today is sunday
-      When i said it's friday
-      Then I'm wrong it's not friday
+# language: fr
+
+Feature: Est-ce vendredi ?
+
+  Scenario: Dimanche n'est pas vendredi
+    Given aujourd'hui c'est dimanche
+    When je demande si c'est vendredi
+    Then je devrais être répondu "Non"
+
+  Scenario: Vendredi c'est vendredi
+    Given aujourd'hui c'est vendredi
+    When je demande si c'est vendredi
+    Then je devrais être répondu "TGIF"
+

@@ -2,27 +2,33 @@ package hellocucumber;
 
 import io.cucumber.java.en.*;
 
-import org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-class IsItFriday {   
-    static String isItFriday(String today) {
-        return null;
+
+public class StepDefinitions {
+
+    private String actualAnswer;
+
+    @Given("aujourd'hui c'est dimanche")
+    public void aujourd_hui_c_est_dimanche() {
+        actualAnswer = IsItFriday.isItFriday("dimanche");
     }
 
-    @Given("today is sunday")
-    public void anExampleScenario() {
-        throw new io.cucumber.java.PendingException();
+    @Given("aujourd'hui c'est vendredi")
+    public void aujourd_hui_c_est_vendredi() {
+        actualAnswer = IsItFriday.isItFriday("vendredi");
     }
 
-    @When("i said it's friday")
-    public void allStepDefinitionsAreImplemented() {
-        throw new io.cucumber.java.PendingException();
+    @When("je demande si c'est vendredi")
+    public void je_demande_si_c_est_vendredi() {
+        // La logique est déjà appliquée dans les @Given, donc rien à ajouter ici
     }
 
-    @Then("I'm wrong it's not friday")
-    public void theScenarioPasses() {
-        throw new io.cucumber.java.PendingException();
+    @Then("je devrais être répondu {string}")
+    public void je_devrais_etre_repondu(String expectedAnswer) {
+        assertEquals(expectedAnswer, actualAnswer);
     }
-
 }
+
+
