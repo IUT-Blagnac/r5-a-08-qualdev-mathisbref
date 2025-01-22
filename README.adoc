@@ -2,44 +2,122 @@
 :icons: font
 :MoSCoW: https://fr.wikipedia.org/wiki/M%C3%A9thode_MoSCoW[MoSCoW]
 
-Ce dépôt concerne les rendus de mailto:mathis.brefuel@etu.univ-tlse2.fr[Mathis Brefuel].
+Ce dépôt concerne les rendus de mailto:tanguy.picuira@etu.univ-tlse2.fr[Tanguy Picuira].
 
 == TP1
 
-.Exemple de code
+.Contenu du fichier is_it_friday.feature
 [source,java]
----
-@Given("today is Sunday")
-public void today_is_sunday() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+----
+Feature: Est-ce vendredi ?
+
+    Scenario Outline: Vérifier si c'est vendredi
+        Given qu'aujourd'hui c'est "<day>"
+        When je demande si c'est vendredi
+        Then on devrait me dire "<answer>"
+
+    Examples:
+        | day            | answer |
+        | Vendredi       | Oui    |
+        | Dimanche       | Non    |
+        | Lundi          | Non    |
+        | anything else! | Non    |
+----
+
+Exécution de la commande suivante:
+[source,java]
+mvn test
+
+Résultat:
+
+.Capture d’écran de l’exécution avec succès des tests
+image::images/SuccessTestsTP1QualDev.png[width=80%]
+
+== TP2
+
+.Contenu du fichier Order.java
+[source,java]
+----
+package dojo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Order {
+    private String owner;
+    private String target;
+    private List<String> cocktails = new ArrayList<>();
+    private String message;
+
+    public void declareOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void declareTarget(String target) {
+        this.target = target;
+    }
+
+    public void addCocktail(String cocktail) {
+        cocktails.add(cocktail);
+    }
+
+    public List<String> getCocktails() {
+        return cocktails;
+    }
+
+    public void addMessage(String message) {
+        this.message = message;
+    }
+
+    public String getTicket() {
+        return "From " + owner + " to " + target + ": " + message;
+    }
 }
----
+----
 
-.Exemple d'image insérée en asciidoc
-image::artifacts-r303.svg[width=80%]
+Résultat:
 
-== TP1
-
-Traduisez le test d’acceptance suivant en feature Gherkin dans un nouveau fichier is_it_friday_yet.feature dans le même répertoire que example.feature :
-
-### Si on est dimanche et qu’on demande. si c’est vendredi, alors on doit repondre "Non".
-
-[source,gherkin]
----
-Feature: Is it Friday ?
-    Scenario: Sunday is not Friday
-      Given today is sunday
-      When i said it's friday
-      Then I'm wrong it's not friday
----
+.Capture d’écran de l’exécution avec succès des tests
+image::images/SuccessTestsTP2QualDev.png[width=80%]
 
 
+== TP3
 
+.Contenu du fichier todoValidation.feature
+[source,java]
+----
+Feature: Validating a TODO list
+    To maintain consistency in task formatting, we validate a TODO list.
 
+    Scenario: Every task starts with a capital letter
+        Given A TODO list file "todo.txt"
+        Then Each task should start with a capital letter
 
+    Scenario: Every task ends with a period
+        Given A TODO list file "todo.txt"
+        Then Each task should end with a period
 
+    Scenario: Adding a new task
+        Given A TODO list file "todo.txt"
+        When I add a new task "New Task."
+        Then Each task should start with a capital letter and end with a period
+----
 
+== TP4
 
+=== mvn test | Select-Object -Last 16 | Out-File report.txt (windows)
 
+[source, shell]
+----
+include::TP1-QualDev/hellocucumber/report.txt[]
+----
 
+Comme l'include ne fonctionne pas je vais mettre un screen du fichier
+
+.Capture d'écran du fichier report.txt du TP1
+image::images/reporttxtHelloCucumber.png[width=80%]
+
+=== Cukedoctor
+image::images/cukeDoctor.png[width=80%]
+
+Enfin, Serenity n'a pas fonctionné.
