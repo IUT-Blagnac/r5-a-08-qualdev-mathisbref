@@ -120,4 +120,3 @@ image::images/reporttxtHelloCucumber.png[width=80%]
 === Cukedoctor
 image::images/cukeDoctor.png[width=80%]
 
-Enfin, Serenity n'a pas fonctionné.
